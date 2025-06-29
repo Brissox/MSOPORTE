@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.mockito.ArgumentMatchers.any;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -115,18 +117,42 @@ public class soporteServicesTest {
     }
 
 
-/*
+    @Test
+    public void testEditarSoporte(){
+
+        soporte soporteO = new soporte();
+        soporteO.setId_soporte(11L);
+        soporteO.setAsunto("problema");
+        soporteO.setDescripcion("Inicio");
+
+        soporte soporteE = new soporte();
+        soporteE.setId_soporte(11L);
+        soporteE.setAsunto("Error");
+        soporteE.setDescripcion("No puedo entrar");
+
+
+        when(soporterepository.save(any(soporte.class))).thenReturn(soporteE);
+        when(soporterepository.existsById(11L)).thenReturn(true);
+        soporte resultado = soporteservices.GuardarSoporte(soporteE);
+
+        assertNotNull(resultado);
+        assertEquals(11L, resultado.getId_soporte());
+        assertEquals("Error", resultado.getAsunto());
+        assertEquals("No puedo entrar", resultado.getDescripcion());
+
+        verify(soporterepository, times(1)).save(soporteE);
+    }
 
     @Test
-    public void testEliminarEnvio(){
+    public void testEliminarRuta(){
         Long id = 11L;
-        doNothing().when(enviorepository).deleteById(id);
+        doNothing().when(soporterepository).deleteById(id);
 
-        enviosservices.Eliminar***(id);
+        soporteservices.EliminarSoporte(11L);
 
-        verify(enviosrepository.times(1)).deleteById(id);
+        verify(soporterepository, times(1)).deleteById(id);
 
     }
-*/
+
 }
 

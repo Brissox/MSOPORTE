@@ -28,5 +28,8 @@ public class soporteServices {
         return soporterepository.save(soporte);
 
     }
+    public void EliminarSoporte(Long id_soporte){
+        soporterepository.deleteById(id_soporte);
+    }
 
 }
